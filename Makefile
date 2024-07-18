@@ -20,12 +20,11 @@ run:
 
 # ==============================================================================
 # Running tests within the local computer
+test-only:
+	CGO_ENABLED=0 go test -count=1 ./...
 
 test-r:
 	CGO_ENABLED=1 go test -race -count=1 ./...
-
-test-only:
-	CGO_ENABLED=0 go test -count=1 ./...
 
 lint:
 	CGO_ENABLED=0 go vet ./...
@@ -35,31 +34,3 @@ vuln-check:
 	govulncheck -show verbose ./... 
 
 test: test-only lint vuln-check
-
-test-race: test-r lint vuln-check
-
-# ==============================================================================
-# Modules support
-
-deps-reset:
-	git checkout -- go.mod
-	go mod tidy
-	go mod vendor
-
-tidy:
-	go mod tidy
-	go mod vendor
-
-deps-list:
-	go list -m -u -mod=readonly all
-
-deps-upgrade:
-	go get -u -v ./...
-	go mod tidy
-	go mod vendor
-
-deps-cleancache:
-	go clean -modcache
-
-list:
-	go list -mod=mod all
