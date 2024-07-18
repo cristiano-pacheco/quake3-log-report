@@ -10,7 +10,7 @@ import (
 
 func main() {
 	// Define a command-line flag for the file path
-	filePath := flag.String("file", "tests/quake3.log", "path to the quake3 log file")
+	filePath := flag.String("file", "quake3.log", "path to the quake3 log file")
 	outputType := flag.String("outputType", "ranking", "ranking|report")
 	flag.Parse()
 

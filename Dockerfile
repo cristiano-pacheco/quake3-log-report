@@ -16,8 +16,8 @@ RUN go mod download
 # Copy the source code into the container
 COPY . .
 
-# Build the Go app and name the executable quakelogreport
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o quakelogreport ./cmd/cli
+# Build the Go app and name the executable
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd/cli
 
 # Stage 2: Run the Go application
 FROM alpine:latest
@@ -26,10 +26,10 @@ FROM alpine:latest
 WORKDIR /app
 
 # Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/quakelogreport .
+COPY --from=builder /app/main .
 
 # Copy the log file to the container (optional if needed for the test run)
 COPY quake3.log .
 
 # Command to run the executable with default arguments
-CMD ["./quakelogreport"]
+CMD ["./main"]
