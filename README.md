@@ -1,5 +1,7 @@
 # Quake 3 Log Report
 
+![CI](https://github.com/cristiano-pacheco/quake3-log-report/actions/workflows/go.yml/badge.svg)
+
 This Go program reads and parses a Quake3 log file, grouping kill events by match and calculating statistics such as total kills, unique players, kills per player, and kills by type.
 
 The requirements for is on [this file](docs/requirements.md).
